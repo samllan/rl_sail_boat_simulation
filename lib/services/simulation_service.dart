@@ -1,4 +1,5 @@
-import 'package:flutter/scheduler.dart'; // Import SchedulerBinding for Ticker
+import 'package:flutter/foundation.dart'; // Import for ChangeNotifier
+import 'package:flutter/scheduler.dart'; // Import for Ticker
 import 'physics_service.dart';
 
 class SimulationService extends ChangeNotifier {
@@ -6,8 +7,8 @@ class SimulationService extends ChangeNotifier {
   late Ticker _ticker;
 
   SimulationService(this.physicsService) {
-    physicsService.createSampleEntities(); // Add this line
-    _ticker = Ticker(_tick)..start(); // Initialize Ticker here
+    physicsService.createSampleEntities();
+    _ticker = Ticker(_tick)..start();
   }
 
   void _tick(Duration elapsed) {

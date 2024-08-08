@@ -10,7 +10,6 @@ class PhysicsService {
 
   void addEntity(Entity entity) {
     entities.add(entity);
-    world.createBody(entity.body);
   }
 
   void createSampleEntities() {
@@ -24,7 +23,7 @@ class PhysicsService {
       ..restitution = 0.8;
     
     final body = world.createBody(bodyDef)..createFixture(fixtureDef);
-    addEntity(Entity(body, Colors.blue)); // Ensure Entity constructor handles Colors.blue properly
+    addEntity(Entity(body, Colors.blue));
   }
 
   void stepSimulation(double timeStep) {
