@@ -1,9 +1,9 @@
-import 'package:flutter/widgets.dart'; // Import this
+import 'package:flutter/scheduler.dart'; // Import SchedulerBinding for Ticker
 import 'physics_service.dart';
 
 class SimulationService extends ChangeNotifier {
   final PhysicsService physicsService;
-  late Ticker _ticker; // Use late keyword to initialize the Ticker later
+  late Ticker _ticker;
 
   SimulationService(this.physicsService) {
     physicsService.createSampleEntities(); // Add this line
