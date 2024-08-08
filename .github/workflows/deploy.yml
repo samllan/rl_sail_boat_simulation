@@ -56,7 +56,7 @@ jobs:
       # 'flutter build web --release' compiles the Flutter project into a web application.
       # The '--release' flag indicates that this should be a production build, which is optimized and minified.
       - name: Build Web
-        run: flutter build web --release
+        run: flutter build web --release --base-href /rl_sail_boat_simulation/
 
       # The fifth step moves the built files to the 'docs' directory.
       # This step ensures that the files are in the correct location for GitHub Pages to serve them.
