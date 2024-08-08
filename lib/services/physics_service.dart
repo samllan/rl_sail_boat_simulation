@@ -1,5 +1,5 @@
 import 'package:forge2d/forge2d.dart';
-import '../models/entity.dart';
+import '../models/boat.dart';
 import 'package:flutter/material.dart';
 
 class PhysicsService {
@@ -21,7 +21,7 @@ class PhysicsService {
     final body = world.createBody(bodyDef);
 
     final boatShape = PolygonShape();
-    boatShape.setAsBox(1.0, 0.5); // Boat size
+    boatShape.setAsBoxXY(1.0, 0.5); // Boat size
 
     final fixtureDef = FixtureDef(boatShape)
       ..density = 1.0

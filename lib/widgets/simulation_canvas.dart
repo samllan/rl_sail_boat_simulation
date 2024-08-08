@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forge2d/forge2d.dart';
 import '../services/physics_service.dart';
-import '../models/entity.dart';
+import '../models/boat.dart';
 
 class SimulationCanvas extends StatelessWidget {
   final PhysicsService physicsService;
