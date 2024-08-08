@@ -1,64 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';  // Ensure this import is present
-import 'services/simulation_service.dart';
 import 'services/physics_service.dart';
-import 'models/entity.dart';  // Import the Entity class
+import 'services/simulation_service.dart';
+import 'widgets/simulation_view.dart';
 
 void main() {
-  runApp(MyApp());
+  final physicsService = PhysicsService();
+  final simulationService = SimulationService(physicsService);
+
+  runApp(SimulationApp(simulationService));
 }
 
-class MyApp extends StatelessWidget {
+class SimulationApp extends StatelessWidget {
+  final SimulationService simulationService;
+
+  SimulationApp(this.simulationService);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('RL Sail Boat Simulation'),
-        ),
-        body: SimulationScreen(),
+      title: 'Simulation Web App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: SimulationView(simulationService),
     );
-  }
-}
-
-class SimulationScreen extends StatelessWidget {
-  final SimulationService simulationService = SimulationService(PhysicsService());
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => simulationService,
-      child: Consumer<SimulationService>(
-        builder: (context, simulationService, child) {
-          return CustomPaint(
-            painter: SimulationPainter(simulationService.physicsService.entities),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class SimulationPainter extends CustomPainter {
-  final List<Entity> entities;
-
-  SimulationPainter(this.entities);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    for (var entity in entities) {
-      // Paint each entity
-      canvas.drawCircle(
-        Offset(entity.body.position.x * size.width, size.height - entity.body.position.y * size.height),
-        10.0, // Example radius
-        entity.paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

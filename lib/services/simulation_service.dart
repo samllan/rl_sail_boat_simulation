@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart'; // Import for ChangeNotifier
-import 'package:flutter/scheduler.dart'; // Import for Ticker
+import 'package:flutter/widgets.dart';
 import 'physics_service.dart';
 
 class SimulationService extends ChangeNotifier {
   final PhysicsService physicsService;
-  late Ticker _ticker;
+  Ticker _ticker;
 
   SimulationService(this.physicsService) {
-    physicsService.createSampleEntities();
+    physicsService.createSampleEntities(); // Add this line
     _ticker = Ticker(_tick)..start();
   }
 
