@@ -41,8 +41,10 @@ class PhysicsService {
       // Check for boundary collisions and adjust position/velocity
       if (boat.body.position.x - 1 < 0 || boat.body.position.x + 1 > 10) {
         boat.body.linearVelocity = Vector2(-boat.body.linearVelocity.x * 0.8, boat.body.linearVelocity.y); // Bounce back
+        boat.body.linearVelocity = Vector2(-boat.body.linearVelocity.x * 0.8, boat.body.linearVelocity.y); // Bounce back
       }
       if (boat.body.position.y - 0.5 < 0 || boat.body.position.y + 0.5 > 10) {
+        boat.body.linearVelocity = Vector2(boat.body.linearVelocity.x, -boat.body.linearVelocity.y * 0.8); // Bounce back
         boat.body.linearVelocity = Vector2(boat.body.linearVelocity.x, -boat.body.linearVelocity.y * 0.8); // Bounce back
       }
     }
