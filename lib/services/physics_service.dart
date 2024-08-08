@@ -10,7 +10,7 @@ class PhysicsService {
 
   void addEntity(Entity entity) {
     entities.add(entity);
-    world.createBody(entity.body);
+    world.createBody(entity.body);  // Ensure this logic is correct
   }
 
   void createSampleEntities() {
@@ -23,7 +23,7 @@ class PhysicsService {
       ..friction = 0.3
       ..restitution = 0.8;
 
-    final body = world.createBody(bodyDef)..createFixture(fixtureDef);
+    final body = world.createBody(bodyDef)..createFixture(fixtureDef);  // Ensure the body is created from bodyDef
     addEntity(Entity(body, Colors.blue));
   }
 
