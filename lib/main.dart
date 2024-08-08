@@ -4,17 +4,10 @@ import 'services/simulation_service.dart';
 import 'widgets/simulation_view.dart';
 
 void main() {
-  final physicsService = PhysicsService();
-  final simulationService = SimulationService(physicsService);
-
-  runApp(SimulationApp(simulationService));
+  runApp(SimulationApp());
 }
 
 class SimulationApp extends StatelessWidget {
-  final SimulationService simulationService;
-
-  SimulationApp(this.simulationService);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +15,35 @@ class SimulationApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SimulationView(simulationService),
+      home: SimulationHomePage(),
     );
+  }
+}
+
+class SimulationHomePage extends StatefulWidget {
+  @override
+  _SimulationHomePageState createState() => _SimulationHomePageState();
+}
+
+class _SimulationHomePageState extends State<SimulationHomePage> with TickerProviderStateMixin {
+  PhysicsService _physicsService;
+  SimulationService _simulationService;
+
+  @override
+  void initState() {
+    super.initState();
+    _physicsService = PhysicsService();
+    _simulationService = SimulationService(_physicsService);
+  }
+
+  @override
+  void dispose() {
+    _simulationService.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SimulationView(_simulationService);
   }
 }
