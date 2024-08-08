@@ -2,12 +2,11 @@ import 'package:forge2d/forge2d.dart';
 import 'package:flutter/material.dart';
 
 class Entity {
-  Body body;
-  Paint paint;
+  final Body body;
+  final Paint paint;
 
-  Entity(this.body, Color color) {
-    paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-  }
+  Entity(this.body, Color color)
+      : paint = Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
 }
