@@ -35,8 +35,8 @@ class PhysicsService {
 
   void stepSimulation(double timeStep) {
     for (var boat in boats) {
-      // Apply water current as a force
-      boat.body.applyForceToCenter(waterCurrent);
+      // Apply water current as a linear impulse
+      boat.body.applyLinearImpulse(waterCurrent, boat.body.worldCenter, true);
 
       // Check for boundary collisions and adjust position/velocity
       if (boat.body.position.x - 1 < 0 || boat.body.position.x + 1 > 10) {
