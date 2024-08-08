@@ -23,10 +23,23 @@ class _SimulationPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (Entity entity in physicsService.entities) {
-      final Vector2 position = entity.body.position;
-      canvas.drawCircle(
-          Offset(position.x * 10, size.height - position.y * 10), 10, entity.paint);
+    // Draw boundary
+    Paint boundaryPaint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke;
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), boundaryPaint);
+
+    // Draw boats
+    for (Boat boat in physicsService.boats) {
+      final Vector2 position = boat.body.position;
+      canvas.drawRect(
+        Rect.fromCenter(
+          center: Offset(position.x * 10, size.height - position.y * 10),
+          width: 20,
+          height: 10,
+        ),
+        boat.paint,
+      );
     }
   }
 

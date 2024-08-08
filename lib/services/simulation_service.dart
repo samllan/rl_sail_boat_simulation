@@ -1,15 +1,20 @@
+import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'physics_service.dart';
 
 class SimulationService extends ChangeNotifier {
   final PhysicsService physicsService;
-  late AnimationController _controller;
+  late Timer _timer;
 
-  SimulationService(this.physicsService, TickerProvider vsync) {
-    physicsService.createSampleEntities();
-    _controller = AnimationController(vsync: vsync, duration: const Duration(days: 365))
-      ..addListener(_tick)
-      ..repeat();
+  SimulationService(this.physicsService) {
+    physicsService.createSampleBoat();
+    _startSimulation();
+  }
+
+  void _startSimulation() {
+    _timer = Timer.periodic(Duration(milliseconds: 16), (timer) {
+      _tick();
+    });
   }
 
   void _tick() {
@@ -19,7 +24,7 @@ class SimulationService extends ChangeNotifier {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _timer.cancel();
     super.dispose();
   }
 }

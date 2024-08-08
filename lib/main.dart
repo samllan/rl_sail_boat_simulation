@@ -25,7 +25,7 @@ class SimulationHomePage extends StatefulWidget {
   _SimulationHomePageState createState() => _SimulationHomePageState();
 }
 
-class _SimulationHomePageState extends State<SimulationHomePage> with SingleTickerProviderStateMixin {
+class _SimulationHomePageState extends State<SimulationHomePage> {
   late PhysicsService _physicsService;
   late SimulationService _simulationService;
 
@@ -33,7 +33,7 @@ class _SimulationHomePageState extends State<SimulationHomePage> with SingleTick
   void initState() {
     super.initState();
     _physicsService = PhysicsService();
-    _simulationService = SimulationService(_physicsService, this);
+    _simulationService = SimulationService(_physicsService);
   }
 
   @override
