@@ -10,24 +10,29 @@ class PhysicsService {
 
   void addEntity(Entity entity) {
     entities.add(entity);
-    world.createBody(entity.body);  // Ensure this logic is correct
+    world.createBody(entity.body.bodyDef); // Use BodyDef to create the body
   }
 
   void createSampleEntities() {
+    // Example entity creation
     final circleShape = CircleShape()..radius = 1.0;
+
+    // Define the body properties using BodyDef
     final bodyDef = BodyDef()
       ..type = BodyType.dynamic
       ..position.setValues(0, 10);
+
     final fixtureDef = FixtureDef(circleShape)
       ..density = 1.0
       ..friction = 0.3
       ..restitution = 0.8;
-
-    final body = world.createBody(bodyDef)..createFixture(fixtureDef);  // Ensure the body is created from bodyDef
+    
+    final body = world.createBody(bodyDef)..createFixture(fixtureDef);
     addEntity(Entity(body, Colors.blue));
   }
 
   void stepSimulation(double timeStep) {
     world.stepDt(timeStep);
+    // Update entities if necessary
   }
 }
