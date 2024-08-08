@@ -1,5 +1,5 @@
-import 'package:forge2d/forge2d.dart';
 import '../models/entity.dart';
+import 'package:flutter/material.dart';
 
 class PhysicsService {
   final World world;
@@ -9,7 +9,22 @@ class PhysicsService {
 
   void addEntity(Entity entity) {
     entities.add(entity);
-    world.createBody(entity.body);
+    world.createBody(entity.body); // This is correct, as long as entity.body is of type BodyDef
+  }
+
+  void createSampleEntities() {
+    // Example entity creation
+    final circleShape = CircleShape()..radius = 1.0;
+    final bodyDef = BodyDef()
+      ..type = BodyType.dynamic
+      ..position.setValues(0, 10);
+    final fixtureDef = FixtureDef(circleShape)
+      ..density = 1.0
+      ..friction = 0.3
+      ..restitution = 0.8;
+    
+    final body = world.createBody(bodyDef)..createFixture(fixtureDef);
+    addEntity(Entity(body, Colors.blue));
   }
 
   void stepSimulation(double timeStep) {
